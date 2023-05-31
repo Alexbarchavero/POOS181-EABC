@@ -140,28 +140,28 @@ textarea {
   resize: none;
 }
 
-#menu {
+#medico {
   margin-bottom: 20px;
 }
 
-#menu ul {
+#medico ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-#menu li {
+#medico li {
   float: left;
 }
 
-#menu li a {
+#medico li a {
   display: block;
   padding: 10px 20px;
   text-decoration: none;
   color: #000;
 }
 
-#menu li a:hover {
+#medico li a:hover {
   background-color: #f2f2f2;
 }
