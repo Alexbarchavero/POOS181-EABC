@@ -49,11 +49,20 @@ def editar(id):
 
 @app.route('/actualizar/<id>',methods=['POST'])
 def actualizar(id):
-    
+    if request.method == 'POST':
+        varTitulo = request.form['txtTitulo']
+        varArtista = request.form['txtArtista']
+        varAnio = request.form['txtAnio']
+        cursAct = mysql.connection.cursor()
+        cursAct.execute('update tbAlbums set titulo=%s,artista=%s,anio=%s where id=%s',(varTitulo,varArtista,varAnio,id))
+        mysql.connection.commit()
+    flash('Se actualizo el Album: '+varTitulo)
+    return redirect(url_for('index'))
 
 #Declaracion de rutas http://localhost:5000/
 @app.route("/eliminar")
 def eliminar():
+    
     return "Se eliminó en la BD"
 
 #Ejecucion del Servidor en el puerto 5000
