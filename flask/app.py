@@ -60,10 +60,19 @@ def actualizar(id):
     return redirect(url_for('index'))
 
 #Declaracion de rutas http://localhost:5000/
-@app.route("/eliminar")
-def eliminar():
-    
-    return "Se eliminó en la BD"
+
+@app.route('/eliminar/<id>')
+def eliminar(id):
+    return render_template('eliminar.html', album = id)
+
+@app.route('/borrar/<id>', methods=['POST'])
+def borrar(id):
+    cursorDel = mysql.connection.cursor()
+    cursorDel.execute('DELETE FROM tbAlbums WHERE id=%s', (id,))
+    mysql.connection.commit()
+    flash('Se eliminó el Álbum con ID: ' + id)
+    return redirect(url_for('index'))
+
 
 #Ejecucion del Servidor en el puerto 5000
 if __name__ == '__main__':

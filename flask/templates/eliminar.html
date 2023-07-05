@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar</title>
+</head>
+<body>
+    <h2>Eliminar Album</h2>
+    <br>
+    <h3>¿Esta seguro que desea eliminar el album?</h3>
+    <br>
+    <form action="/borrar/{{album.0.0}}" method="POST">
+        <button>Sí</button>
+    </form>
+    <a href="/"><button>No</button></a>
+</body>
+</html>
