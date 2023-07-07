@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar</title>
+</head>
+<body>
+    <h1>Ingresar Fruta</h1>
+    <br>
+    <form action="">
+        <input type="text" name="txtfruta" placeholder="Fruta">
+        <br><br>
+        <input type="text" name="txtseason" placeholder="Temporada">
+        <br><br>
+        <input type="number" name="txtprecio" placeholder="Precio">
+        <br><br>
+        <input type="number" name="txtstock" placeholder="Stock">
+        <br><br>
+        <button type="submit">Ingresar</button>
+    </form>
+    <br>
+    {% with mensajes= get_flashed_messages() %}
+        {% if mensajes %}
+            {% for msj in mensajes%}
+                <h3>{{msj}}</h3>
+            {%endfor%}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
