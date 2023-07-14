@@ -10,11 +10,43 @@
     <h1>Consultas</h1>
     <h2>Buscar por nombre: </h2>
     
-    <form action="">
-        <input type="text" name="c_nombre" placeholder="Nombre de la flor">
+    <form action="/consultar/{{flor.0}}" method="post">
+        <input type="text" name="cnombre" placeholder="Nombre de la flor">
         <button type="submit">Buscar</button>
     </form><br><br>
 
+    <h2>Fruta:</h2><br>
+    <table>
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>Nombre</td>
+                <td>Cantidad</td>
+                <td>Precio</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fl in flor %}
+            <tr>
+                <td>{{fl.0}}</td>
+                <td>{{fl.1}}</td>
+                <td>{{fl.2}}</td>
+                <td>{{fl.3}}</td>
+                <td>
+                    <a href="/editar">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% with mensajes = get_flashed_messages()%}
+    {% if mensajes%}
+      {% for msj in mensajes %}
+        <h3>{{msj}}</h3>
+      {% endfor %}
+    {% endif %}
+    {%endwith%}
 
     <form action="/">
         <button type="submit">Regresar</button>

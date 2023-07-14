@@ -31,6 +31,34 @@ def guardar():
         cursor1 = mysql.connection.cursor()
         cursor1.execute('insert into tbFlores(nombre,cantidad,precio) values(%s,%s,%s)',(g_nombre,g_cantidad,g_precio))
         mysql.connection.commit()
+    return render_template('mensaje.html')
+
+@app.route('/consultar/<id>',methods=['POST'])
+def consultar(id):
+    if request.method == 'post':
+        cursor2 = mysql.connection.cursor()
+        cursor2.execute('select * from tbFlores where nombre = %s',(id,))
+        consulta = cursor2.fetchone()
+        return render_template('cons_edit.html', flor = consulta)
+
+@app.route('/editar')
+def editar(nombre):
+    cursor4 = mysql.connection.cursor()
+    cursor4.execute('select * from tbFlores where nombre=%s',(nombre,))
+    connombre = cursor4.fetchone()
+    return render_template('editarAlbum.html', flor = connombre)
+
+@app.route('/actualizar<id>',methods=['POST'])
+def actualizar(id):
+    if request.method == 'POST':
+        e_nombre = request.form['e_nombre']
+        e_cantidad = request.form['e_cantidad']
+        e_precio = request.form['e_precio']
+        cursor3 = mysql.connection.cursor()
+        cursor3.execute('update tbFlores set nombre=%s,cantidad=%s,precio=%s where id=%s',(e_nombre, e_cantidad, e_precio, id))
+        mysql.connection.commit()
+    flash('Se actualizo la flor: '+e_nombre)
+    return redirect(url_for('consultayedicion'))
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
