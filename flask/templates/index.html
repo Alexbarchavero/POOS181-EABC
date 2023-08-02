@@ -1,65 +1,99 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Album</title>
-</head>
-<body>
-    <br>
-    <br>
-    <h1>Gestión de Albums</h1>
-    <br>
-    
+
+
+{% extends 'plantilla.html' %}
+
+{% block body %}
+
+
+
+<div class="mt-5 mb-5">
+    <h1 class="display-1 text-center">Gestión de Albums</h1>
+</div>
+
+
+<!-- Inicio container text-center -->
+<div class="container text-center">
+
     {% with mensajes= get_flashed_messages() %}
         {% if mensajes %}
             {% for msj in mensajes%}
-                <h3>{{msj}}</h3>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong> {{msj}} </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>                  
+                <script>
+                    Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                  )
+                </script>
             {%endfor%}
         {% endif %}
     {% endwith %}
 
+    <div class="row">
+        <div class="col-md-6"> <!-- Inicio col-md-5 -->
+            <div class="card card-body mb-5"> 
+                <h1>Ingresar Album</h1>              
+                <form action="/guardar" method="POST">
 
-    <br>
-    <form action="/guardar" method="POST">
-        <input type="text" name="txtTitulo" placeholder="Ingrese el titulo">
-        <input type="text" name="txtArtista" placeholder="Ingrese el artista">
-        <input type="number" name="txtAnio" placeholder="Ingrese el año">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="txtTitulo" placeholder="Ingrese el titulo" required>
+                    </div>
 
-        <button type="submit">Guardar</button>
-    </form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="txtArtista" placeholder="Ingrese el artista" required>
+                    </div>
 
-    <br>
-    <br>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" name="txtAnio" placeholder="Ingrese el año" required>
+                    </div>
 
-    <h1>Albums Guardados</h1>
-    <br>
-    <table>
-        <thead>
-            <tr>
-                <td>Id: </td>
-                <td>Album: </td>
-                <td>Artista: </td>
-                <td>Año publicacion: </td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for alb in lsAlbums %}
-                <tr>
-                    <td> {{alb.0}} </td>
-                    <td> {{alb.1}} </td>
-                    <td> {{alb.2}} </td>
-                    <td> {{alb.3}} </td>
-                    <td>
-                        <a href="/editar/{{alb.0}}">Editar</a>
-                        <a href="/eliminar/{{alb.0}}">Eliminar</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success" >Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- Fin col-md-5 -->
 
+        <div class="col-md-6"> <!-- Inicio col-md-7 -->
+            <h1>Albums Guardados</h1>
+            
+            <table class="table ">
+                <thead>
+                    <tr class="table-success">
+                        <th scope="col">Id: </td>
+                        <th scope="col">Album: </td>
+                        <th scope="col">Artista: </td>
+                        <th scope="col">Año publicacion: </td>
+                        <th scope="col">Editar</td>
+                        <th scope="col">Borrar</td>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for alb in lsAlbums %}
+                        <tr>
+                            <td> {{alb.0}} </td>
+                            <td> {{alb.1}} </td>
+                            <td> {{alb.2}} </td>
+                            <td> {{alb.3}} </td>
+                            <td>
+                                <a href="/editar/{{alb.0}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                            </td>
+                            <td>
+                                <a href="/eliminar/{{alb.0}}" class="btn btn-danger" ><i class="bi bi-trash3"></i></a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> <!-- Fin col-md-7 -->
 
+    </div> <!-- Fin row -->
+</div><!-- Fin container text-center -->
 
-</body>
-</html>
+    
+
+{% endblock %}

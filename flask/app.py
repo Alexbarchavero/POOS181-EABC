@@ -50,9 +50,9 @@ def editar(id):
 @app.route('/actualizar/<id>',methods=['POST'])
 def actualizar(id):
     if request.method == 'POST':
-        varTitulo = request.form['txtTitulo']
-        varArtista = request.form['txtArtista']
-        varAnio = request.form['txtAnio']
+        varTitulo = request.form['txtTituloUp']
+        varArtista = request.form['txtArtistaUp']
+        varAnio = request.form['txtAnioUp']
         cursAct = mysql.connection.cursor()
         cursAct.execute('update tbAlbums set titulo=%s,artista=%s,anio=%s where id=%s',(varTitulo,varArtista,varAnio,id))
         mysql.connection.commit()
